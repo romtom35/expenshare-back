@@ -15,17 +15,34 @@ use Symfony\Component\Routing\Annotation\Route;
 class ShareGroupController extends BaseController
 {
     /**
-     * @Route("/", name="sharegroup_list", methods="GET")
+     * @Route("/", name="sharegroup_index", methods="GET")
      */
     public function index(Request $request): Response
     {
-        $persons = $this->getDoctrine()->getRepository(ShareGroup::class)
+        $sharegroups = $this->getDoctrine()->getRepository(ShareGroup::class)
             ->createQueryBuilder('s')
             ->getQuery()
             ->getArrayResult();
 
         if ($request->isXmlHttpRequest()) {
-            return $this->json($persons);
+            return $this->json($sharegroups);
         }
+    }
+
+    /**
+     * @Route("/new", name="sharegroup_new", methods="GET|POST")
+     */
+    public function new(Request $request): Response
+    {
+        $sharegroup = new ShareGroup();
+
+        $slug = $request->get('slug');
+        $sharegroup->setSlug($slug);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($sharegroup);
+        $em->flush();
+
+
     }
 }

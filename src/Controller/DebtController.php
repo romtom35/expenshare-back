@@ -19,13 +19,13 @@ class DebtController extends BaseController
      */
     public function index(Request $request): Response
     {
-        $persons = $this->getDoctrine()->getRepository(Debt::class)
+        $debts = $this->getDoctrine()->getRepository(Debt::class)
             ->createQueryBuilder('d')
             ->getQuery()
             ->getArrayResult();
 
         if ($request->isXmlHttpRequest()) {
-            return $this->json($persons);
+            return $this->json($debts);
         }
     }
 }

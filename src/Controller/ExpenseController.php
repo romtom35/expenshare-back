@@ -19,13 +19,13 @@ class ExpenseController extends BaseController
      */
     public function index(Request $request): Response
     {
-        $persons = $this->getDoctrine()->getRepository(Expense::class)
+        $expenses = $this->getDoctrine()->getRepository(Expense::class)
             ->createQueryBuilder('e')
             ->getQuery()
             ->getArrayResult();
 
         if ($request->isXmlHttpRequest()) {
-            return $this->json($persons);
+            return $this->json($expenses);
         }
     }
 }
