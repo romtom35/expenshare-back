@@ -36,9 +36,9 @@ class Debt
     private $paid = '0';
 
     /**
-     * @var \Person
+     * @var Person
      *
-     * @ORM\ManyToOne(targetEntity="Person")
+     * @ORM\ManyToOne(targetEntity="Person", inversedBy="debt")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="from_id", referencedColumnName="id")
      * })
@@ -46,9 +46,9 @@ class Debt
     private $from;
 
     /**
-     * @var \Person
+     * @var Person
      *
-     * @ORM\ManyToOne(targetEntity="Person")
+     * @ORM\ManyToOne(targetEntity="Person", inversedBy="debt")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="to_id", referencedColumnName="id")
      * })

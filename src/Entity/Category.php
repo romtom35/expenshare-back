@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,12 @@ class Category
      */
     private $icon;
 
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\Expense", mappedBy="category")
+     */
+    private $expense;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +68,24 @@ class Category
     {
         $this->icon = $icon;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getExpense(): ?Collection
+    {
+        return $this->expense;
+    }
+
+    /**
+     * @param Collection $expense
+     * @return Category
+     */
+    public function setExpense(Collection $expense): ?Category
+    {
+        $this->expense = $expense;
         return $this;
     }
 

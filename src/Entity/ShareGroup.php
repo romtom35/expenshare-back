@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +43,12 @@ class ShareGroup
      */
     private $closed = '0';
 
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\Person", mappedBy="shareGroup")
+     */
+    private $person;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,6 +87,24 @@ class ShareGroup
     {
         $this->closed = $closed;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getPerson(): ?Collection
+    {
+        return $this->person;
+    }
+
+    /**
+     * @param Collection $person
+     * @return ShareGroup
+     */
+    public function setPerson(Collection $person): ?ShareGroup
+    {
+        $this->person = $person;
         return $this;
     }
 
