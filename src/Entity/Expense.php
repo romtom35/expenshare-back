@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="expense", indexes={@ORM\Index(name="fk_expense_category1_idx", columns={"category_id"}), @ORM\Index(name="fk_expense_person1_idx", columns={"person_id"})})
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Expense
 {
@@ -61,6 +62,14 @@ class Expense
      * })
      */
     private $person;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->setCreatedAt(new \DateTime());
+    }
 
     public function getId(): ?int
     {

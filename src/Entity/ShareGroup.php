@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="share_group", uniqueConstraints={@ORM\UniqueConstraint(name="slug_UNIQUE", columns={"slug"})})
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class ShareGroup
 {
@@ -48,6 +49,14 @@ class ShareGroup
      * @ORM\OneToMany(targetEntity="App\Entity\Person", mappedBy="shareGroup")
      */
     private $person;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->setCreatedAt(new \DateTime());
+    }
 
     public function getId(): ?int
     {
