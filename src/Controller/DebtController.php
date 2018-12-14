@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
+use App\Entity\Debt;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,22 +10,22 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class CategoryController
  * @package App\Controller
- * @Route("/category")
+ * @Route("/debt")
  */
-class CategoryController extends BaseController
+class DebtController extends BaseController
 {
     /**
-     * @Route("/", name="category_list", methods="GET")
+     * @Route("/", name="debt_list", methods="GET")
      */
     public function index(Request $request): Response
     {
-        $categories = $this->getDoctrine()->getRepository(Category::class)
-            ->createQueryBuilder('c')
+        $persons = $this->getDoctrine()->getRepository(Debt::class)
+            ->createQueryBuilder('d')
             ->getQuery()
             ->getArrayResult();
 
         if ($request->isXmlHttpRequest()) {
-            return $this->json($categories);
+            return $this->json($persons);
         }
     }
 }
