@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * ShareGroup
@@ -47,6 +48,7 @@ class ShareGroup
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="App\Entity\Person", mappedBy="shareGroup")
+     * @MaxDepth(2)
      */
     private $person;
 
@@ -115,6 +117,11 @@ class ShareGroup
     {
         $this->person = $person;
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getSlug();
     }
 
 

@@ -23,6 +23,16 @@ class Person
     private $id;
 
     /**
+     * @param mixed $shareGroupId
+     * @return Person
+     */
+    public function setShareGroupId($shareGroupId)
+    {
+        $this->shareGroupId = $shareGroupId;
+        return $this;
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
@@ -157,6 +167,11 @@ class Person
     {
         $this->to = $to;
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getFirstname();
     }
 
 
